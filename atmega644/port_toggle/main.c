@@ -7,7 +7,10 @@ int main(void) {
 	DDRC = 0xFF;
 
 	while(1) {
-		PORTC = 0x00; // set pin high			
+		_delay_ms(20.0);
+		PORTC = (1<<PC0); // set pin high			
+		_delay_ms(20.0);
+		PORTC = (0<<PC0); // set pin low
 	}
 
 }
