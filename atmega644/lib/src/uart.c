@@ -1,4 +1,9 @@
-
+/**
+ *	@file uart.c
+ *	@author Stanislav Bobovych
+ *	@details
+ *	Bare bones uart driver hardcoded to run at 9600 baud.
+ */
 #include <avr/io.h>
 
 void USART_Init(void)

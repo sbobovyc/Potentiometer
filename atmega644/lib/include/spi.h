@@ -1,6 +1,8 @@
 /**
- * Bare bones spi library.
- *
+ *	@file spi.h
+ *	@author Stanislav Bobovych
+ *	@details
+ *	Bare bones master spi driver.
  */
 #ifndef SPI_H
 #define SPI_H

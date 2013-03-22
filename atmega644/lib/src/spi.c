@@ -1,6 +1,8 @@
 /**
- * Bare bones spi library.
- *
+ *	@file spi.c
+ *	@author Stanislav Bobovych
+ *	@details
+ *	Bare bones master spi driver.
  */
 #include <avr/io.h>
 
