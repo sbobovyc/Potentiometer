@@ -1,3 +1,4 @@
+## C
 # Object files
 *.o
 
@@ -25,3 +26,7 @@
 *.map
 *.sym
 *.d
+
+## Python
+*.py[cod]
+
