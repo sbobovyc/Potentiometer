@@ -28,8 +28,9 @@ void max5354_setVoltage(float voltage) {
 	command = MAX5354_LD_UP | (NB<<3);
 	MAX5354_CS_LOW;
 	_delay_us(1);
-	SPI_send(command>>8);
-	SPI_send(command);
+	// uint16_t is little endian on avr, DAC expects first byte to have MSB
+	SPI_send((uint8_t)command>>8);	// byte with MSB
+	SPI_send((uint8_t)command);	// lower byte
 	MAX5354_CS_HIGH;
 }
 

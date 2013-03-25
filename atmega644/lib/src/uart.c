@@ -6,6 +6,8 @@
  */
 #include <avr/io.h>
 
+#include "uart.h"
+
 void USART_init(void)
 {
 	#define BAUD 9600

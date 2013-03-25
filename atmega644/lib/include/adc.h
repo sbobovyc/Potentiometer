@@ -11,11 +11,11 @@
 
 #include <avr/io.h>
 
-void ADC_Init(void);
+void ADC_init(void);
 
 /*
  * @param channel is any single ended adc channel, ADC0D through ADC7D
  */
-uint16_t ADC_Read(uint8_t channel); 
+uint16_t ADC_read(uint8_t channel); 
 
 #endif /* ADC_H */
