@@ -16,13 +16,13 @@ int main(void) {
 	//uint16_t command = 0x0008; // DAC reg = 1, Vout = 0.0013 V
 	DDR_CS |= (1<<DD_CS); // SPI CS, output
 
-	SPI_Init();
+	SPI_init();
 
 	while(1) {
 		CS_LOW;
 		_delay_us(1);
-		SPI_Send(command>>8);
-		SPI_Send(command);
+		SPI_send(command>>8);
+		SPI_send(command);
 		CS_HIGH;
 		_delay_us(1);
 	}

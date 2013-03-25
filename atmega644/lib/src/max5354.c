@@ -10,7 +10,7 @@
 #include "max5354.h"
 
 void max5354_init(void) {
-	SPI_Init();
+	SPI_init();
 	// set SPI CS as output
 	MAX5354_DDR_CS |= (1<<MAX5354_DD_CS); // SPI CS, output
 }
@@ -28,15 +28,15 @@ void max5354_setVoltage(float voltage) {
 	command = MAX5354_LD_UP | (NB<<3);
 	MAX5354_CS_LOW;
 	_delay_us(1);
-	SPI_Send(command>>8);
-	SPI_Send(command);
+	SPI_send(command>>8);
+	SPI_send(command);
 	MAX5354_CS_HIGH;
 }
 
 void max5354_shutdown(void) {
 	MAX5354_CS_LOW;
 	_delay_us(1);
-	SPI_Send(MAX5354_SHUTDN>>8);
-	SPI_Send(0);
+	SPI_send(MAX5354_SHUTDN>>8);
+	SPI_send(0);
 	MAX5354_CS_HIGH;
 }

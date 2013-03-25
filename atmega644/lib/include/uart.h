@@ -7,7 +7,7 @@
 #ifndef UART_H
 #define UART_H
 
-void USART_Init(void);
-void USART_Transmit(unsigned char data);
+void USART_init(void);
+void USART_transmit(unsigned char data);
 
 #endif /* UART_H */

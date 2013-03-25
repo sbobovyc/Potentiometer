@@ -6,7 +6,7 @@
  */
 #include <avr/io.h>
 
-void USART_Init(void)
+void USART_init(void)
 {
 	#define BAUD 9600
 	#include <util/setbaud.h>
@@ -19,7 +19,7 @@ void USART_Init(void)
 	UCSR0C = (0<<USBS0)|(3<<UCSZ00);
 }
 
-void USART_Transmit(unsigned char data)
+void USART_transmit(unsigned char data)
 {
 	/* Wait for empty transmit buffer*/
 	while( !( UCSR0A & (1<<UDRE0)) );
