@@ -1,0 +1,28 @@
+% Example LaTeX document
+\documentclass[a4paper,12pt]{article}
+\usepackage{graphicx}
+\usepackage{url}
+%\usepackage{colortbl}
+
+\begin{document}
+\title{Biomedical Potentiostat Project}
+\author{Stanislav Bobovych, Shilpa Kokare}
+\maketitle
+
+%% Graphics Path
+%% =============
+\graphicspath{{./images/}}
+
+%\input{definitions}
+\input{sections/Introduction}
+%\input{sections/Background}
+\input{sections/Methodology}
+\input{sections/Results}
+\input{sections/Conclusion}
+%\input{sections/Future_Work}
+%\input{sections/Appendix}
+
+\bibliographystyle{plain}
+\bibliography{bibtex/report}
+
+\end{document}

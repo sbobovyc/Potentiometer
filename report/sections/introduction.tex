@@ -1,0 +1,23 @@
+\section{Introduction}
+The motivation behind this project is to get familiar with MEMS sensors. Specifically, how to
+manufacture them, interface them to embedded systems, profile and characterize them. The
+construction of a portable glucose sensor is a good fit for this task. The construction of this system
+incurs low cost per unit and cross cuts across the disciplines of chemistry and computer engineering.
+
+There are major challenges presented in this project. Manufacturing the sensor is a laborious process
+with many steps and many places where things could go wrong. Also, our sensor will not be ready for
+profiling until the end of the semester, so we will have to make some assumptions about how we tune
+our amplification circuitry for certain current and voltage ranges. Profiling the sensor will take time
+and we will be working with unfamiliar lab equipment. In addition to hardware, we will need to write
+desktop and embedded software. Finally, debugging the pieces of the system and then integrating the
+various modules will be a challenge.
+
+Our approach to building a glucose sensor is to use a potentiostat in voltammetry mode, so that we can
+measure concentration of a glucose solution by the amount of current flowing between two electrodes.
+The current measurements will be streamed to a PC via an XBee radio, where the data will be post
+processed and displayed in a user friendly graph format.
+
+The expected result is that our system will be robust, low power, user friendly and that we will be able
+to detect at least 3 different concentrations of glucose.
+
+\cite{Gopinath:2006}
