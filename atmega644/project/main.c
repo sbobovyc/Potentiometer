@@ -14,14 +14,14 @@ int main(void) {
 	ADC_init();
 
 	// set the DAC voltage to 1 V
-	max5354_setVoltage(1.0);
+	max5354_setVoltage(0.7);
 
 	while(1) {
 		_delay_us(1);
 		// read voltage from opamp
 		reading = ADC_read(ADC0D);
 		// transmit over serial, little endian format
-		USART_transmit((uint8_t)reading>>8);
+		USART_transmit((uint8_t)(reading>>8));
 		USART_transmit((uint8_t)reading);
 	}
 }
