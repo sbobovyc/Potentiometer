@@ -9,7 +9,7 @@
 #ifndef MAX5354_H
 #define MAX5354_H
 
-#define MAX5354_VREF	1.99
+#define MAX5354_VREF	1.9
 #define MAX5354_GAIN	1
 #define MAX5354_RANGE	1024
 
