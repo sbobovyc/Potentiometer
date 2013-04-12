@@ -134,7 +134,7 @@ class GraphFrame(wx.Frame):
         self.xmin_control = BoundControlBox(self.panel, -1, "X min", 0)
         self.xmax_control = BoundControlBox(self.panel, -1, "X max", 50)
         self.ymin_control = BoundControlBox(self.panel, -1, "Y min", 0)
-        self.ymax_control = BoundControlBox(self.panel, -1, "Y max", 100)
+        self.ymax_control = BoundControlBox(self.panel, -1, "Y max", 4)
         
         self.pause_button = wx.Button(self.panel, -1, "Pause")
         self.Bind(wx.EVT_BUTTON, self.on_pause_button, self.pause_button)
@@ -167,7 +167,7 @@ class GraphFrame(wx.Frame):
         self.hbox2.Add(self.ymax_control, border=5, flag=wx.ALL)
         
         self.vbox = wx.BoxSizer(wx.VERTICAL)
-        self.vbox.Add(self.canvas, 1, flag=wx.LEFT | wx.TOP | wx.GROW)        
+        self.vbox.Add(self.canvas, 1, flag=wx.LEFT | wx.TOP | wx.EXPAND)        
         self.vbox.Add(self.hbox1, 0, flag=wx.ALIGN_LEFT | wx.TOP)
         self.vbox.Add(self.hbox2, 0, flag=wx.ALIGN_LEFT | wx.TOP)
         
@@ -184,6 +184,8 @@ class GraphFrame(wx.Frame):
         self.axes = self.fig.add_subplot(111)
         self.axes.set_axis_bgcolor('black')
         self.axes.set_title('Arduino Serial Data', size=12)
+        self.axes.set_xlabel('Time (s)', fontsize=10)
+        self.axes.set_ylabel('Voltage (V)', fontsize=10)
         
         pylab.setp(self.axes.get_xticklabels(), fontsize=8)
         pylab.setp(self.axes.get_yticklabels(), fontsize=8)
@@ -311,8 +313,10 @@ class GraphFrame(wx.Frame):
 
 
 if __name__ == '__main__':
-    app = wx.PySimpleApp()
+    app = wx.App()
     app.frame = GraphFrame()
+    app.frame.SetTitle("Potentiostat monitor")
+    app.frame.axes.set_title('Voltage vs. Time', size=12)
     app.frame.Show()
     app.MainLoop()
 
