@@ -11,15 +11,12 @@ import random
 import struct
 
 last_received = 0.0
-def receiving(ser):
-    global last_received
-    while True:
-        data = ser.read(size=2)                
-        adc_value, = struct.unpack(">H", data)
-        last_received = 3.3*adc_value / (2**10 - 1) 
+
+     
 
 class SerialData(object):
     def __init__(self, port="COM6", init=50):
+        self.Running = True
         try:
             self.ser = ser = serial.Serial(
                 port, 9600, timeout=2, parity=serial.PARITY_NONE,
@@ -30,7 +27,23 @@ class SerialData(object):
             #no serial connection
             self.ser = None
         else:
-            Thread(target=receiving, args=(self.ser,)).start()
+            self.thread = Thread(target=self.receiving, args=(self.ser,))
+            self.thread.start()
+
+    def receiving(self, ser):
+        global last_received
+        while self.Running:
+            raw_data = ser.read(ser.inWaiting())            
+            if '\n' in raw_data and len(raw_data) >= 3:
+                #print "Raw", binascii.hexlify(raw_data)
+                #print "Raw len", len(raw_data)            
+                filtered_data = filter (lambda a: a != '' and len(a) == 2, raw_data.split('\n'))
+                #print "Filtered", filtered_data
+
+                if len(filtered_data) != 0:                
+                    adc_value, = struct.unpack(">H", filtered_data[-1])
+                    voltage = 3.3*adc_value / (2**10 - 1)
+                    last_received = voltage   
         
     def next(self):
         if not self.ser:

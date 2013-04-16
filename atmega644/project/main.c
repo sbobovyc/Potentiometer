@@ -23,5 +23,8 @@ int main(void) {
 		// transmit over serial, little endian format
 		USART_transmit((uint8_t)(reading>>8));
 		USART_transmit((uint8_t)reading);
+		//USART_transmit(0xBA);
+		//USART_transmit(0xFB);
+		USART_transmit('\n');
 	}
 }

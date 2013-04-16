@@ -27,7 +27,7 @@ import random
 import sys
 import wx
 
-REFRESH_INTERVAL_MS = 90
+REFRESH_INTERVAL_MS = 50
 
 # The recommended way to use wx with mpl is with the WXAgg
 # backend. 
@@ -100,7 +100,7 @@ class GraphFrame(wx.Frame):
     def __init__(self):
         wx.Frame.__init__(self, None, -1, self.title)
         
-        self.datagen = DataGen()
+        self.datagen = DataGen()        
         self.data = [self.datagen.next()]
         self.paused = False
         
@@ -111,6 +111,13 @@ class GraphFrame(wx.Frame):
         self.redraw_timer = wx.Timer(self)
         self.Bind(wx.EVT_TIMER, self.on_redraw_timer, self.redraw_timer)        
         self.redraw_timer.Start(REFRESH_INTERVAL_MS)
+
+        self.Bind(wx.EVT_CLOSE, self.on_exit)
+
+        if self.datagen.ser != None:
+            self.flash_status_message("Connected to %s" % self.datagen.ser.port)
+        else:
+            self.flash_status_message("Failed to connect")
 
     def create_menu(self):
         self.menubar = wx.MenuBar()
@@ -297,6 +304,8 @@ class GraphFrame(wx.Frame):
         self.draw_plot()
     
     def on_exit(self, event):
+        self.datagen.Running = False
+        self.datagen.thread.join()
         self.Destroy()
     
     def flash_status_message(self, msg, flash_len_ms=1500):

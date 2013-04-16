@@ -5,6 +5,7 @@ import signal
 import os
 import argparse
 import time
+import binascii
 
 def run(port=0, filepath=None, verbose=False):
     # Make Ctrl+Break raise KeyboardInterrupt, like Python's default Ctrl+C (SIGINT) behavior.
@@ -19,14 +20,19 @@ def run(port=0, filepath=None, verbose=False):
 
     #TODO fix missing the first reading
     while True:
-        try:
-            data = ser.read(size=2)    
+        try:        
+            raw_data = ser.read(ser.inWaiting())            
+            if '\n' in raw_data and len(raw_data) >= 3:                            
+                print "Raw", binascii.hexlify(raw_data)
+                print "Raw len", len(raw_data)            
+                filtered_data = filter (lambda a: a != '' and len(a) == 2, raw_data.split('\n'))
+                print "Filtered", filtered_data
+
+                if len(filtered_data) != 0:                
+                    adc_value, = struct.unpack(">H", filtered_data[-1])
+                    print 3.3*adc_value / (2**10 - 1)
+                    print
             
-            adc_value, = struct.unpack(">H", data)
-            print 3.3*adc_value / (2**10 - 1) 
-            #recordInstance = type("ReplayerRecord", (ReplayerRecord,), dict(hour=hour, minute=minute, second=second,
-            #                        Vdd=vdd, Vout=vout, Vin=vin, Vplus=vplus, Vadj=vadj, gain=gain, current=current, light=light, temperature=temperature))
-                        
         except KeyboardInterrupt:
             end = time.clock()
             print "Read in %.2gs" % (end-start)
