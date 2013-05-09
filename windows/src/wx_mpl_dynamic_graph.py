@@ -238,7 +238,7 @@ class GraphFrame(wx.Frame):
         if self.ymax_control.is_auto():
             ymax = round(max(self.data), 0) + 1
         else:
-            ymax = int(self.ymax_control.manual_value())
+            ymax = int(self.ymax_control.manual_value())        
 
         self.axes.set_xbound(lower=xmin, upper=xmax)
         self.axes.set_ybound(lower=ymin, upper=ymax)
