@@ -192,7 +192,7 @@ class GraphFrame(wx.Frame):
         self.axes.set_axis_bgcolor('black')
         self.axes.set_title('Arduino Serial Data', size=12)
         self.axes.set_xlabel('Time (s)', fontsize=10)
-        self.axes.set_ylabel('Voltage (V)', fontsize=10)
+        self.axes.set_ylabel('Current (uA)', fontsize=10)
         
         pylab.setp(self.axes.get_xticklabels(), fontsize=8)
         pylab.setp(self.axes.get_yticklabels(), fontsize=8)
@@ -325,7 +325,7 @@ if __name__ == '__main__':
     app = wx.App()
     app.frame = GraphFrame()
     app.frame.SetTitle("Potentiostat monitor")
-    app.frame.axes.set_title('Voltage vs. Time', size=12)
+    app.frame.axes.set_title('Current vs. Time', size=12)
     app.frame.Show()
     app.MainLoop()
 

@@ -31,7 +31,7 @@ class SerialData(object):
         else:
             self.thread = Thread(target=self.receiving, args=(self.ser,))
             self.thread.start()
-        self.log_file = csv.writer(open("potentiostat_log.csv", "w"))
+        self.log_file = csv.writer(open("potentiostat_log.csv", "wb"))
 
     def receiving(self, ser):
         global last_received
@@ -47,9 +47,9 @@ class SerialData(object):
                 if len(filtered_data) != 0:                
                     adc_value, = struct.unpack(">H", filtered_data[-1])
                     voltage = 3.3*adc_value / (2**10 - 1)
-                    current = voltage / 39
-                    #last_received = current
-                    last_received = voltage
+                    current = (voltage / 39000) * 10**6
+                    last_received = current
+                    #last_received = voltage
                     nothing_count = 0
                 else:
                     last_received = 0.0
@@ -62,10 +62,10 @@ class SerialData(object):
         if not self.ser:
             return (random.randint(0, 100)) #return anything so we can test when Arduino isn't connected
         #return a float value or try a few times until we get one
-        voltage = last_received
+        data = last_received
         try:
-            self.log_file.writerow([time.time(), voltage])
-            return float(voltage)
+            self.log_file.writerow([time.time(), data])
+            return float(data)
         except ValueError:
             print 'bogus data',raw_line
             time.sleep(.005)
