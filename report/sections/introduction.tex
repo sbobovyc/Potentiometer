@@ -1,23 +1,20 @@
 \section{Introduction}
 The motivation behind this project is to get familiar with MEMS sensors. Specifically, how to
 manufacture them, interface them to embedded systems, profile and characterize them. The
-construction of a portable glucose sensor is a good fit for this task. The construction of this system
+construction of a portable glucose sensor and a potentiostat is a good fit for this task. The construction of this system
 incurs low cost per unit and cross cuts across the disciplines of chemistry and computer engineering.
 
 There are major challenges presented in this project. Manufacturing the sensor is a laborious process
-with many steps and many places where things could go wrong. Also, our sensor will not be ready for
-profiling until the end of the semester, so we will have to make some assumptions about how we tune
-our amplification circuitry for certain current and voltage ranges. Profiling the sensor will take time
-and we will be working with unfamiliar lab equipment. In addition to hardware, we will need to write
-desktop and embedded software. Finally, debugging the pieces of the system and then integrating the
-various modules will be a challenge.
+with many steps and many places where things could go wrong. For instance, our sensor was not ready for
+profiling until the end of the semester, so we had to make some assumptions about how we to tune
+our amplification circuitry for certain current and voltage ranges. Manufacturing and profiling the sensors took a lot of time
+and we were working with unfamiliar lab equipment. When time came to profile our custom sensors, our sensors did not work. In addition to manufacturing the sensors and building an embedded, we wrote
+desktop and embedded software. Finally, there were some challenges in debugging the pieces of the system and then integrating the
+various modules.
 
-Our approach to building a glucose sensor is to use a potentiostat in voltammetry mode, so that we can
+Our approach was to building a glucose sensor and use a potentiostat in amperometry mode, so that we could
 measure concentration of a glucose solution by the amount of current flowing between two electrodes.
-The current measurements will be streamed to a PC via an XBee radio, where the data will be post
-processed and displayed in a user friendly graph format.
+The current measurements was streamed to a PC via an XBee radio, where the data is post
+processed and displayed in a user friendly graph format. The expected result of this project was that our system is robust, low power, user friendly and able to detect at least 3 different concentrations of glucose.
 
-The expected result is that our system will be robust, low power, user friendly and that we will be able
-to detect at least 3 different concentrations of glucose.
-
-\cite{Gopinath:2006}
+The report is laid out in several sections. First, we present some background material about the theory behind glucose sensors and potentiostats. Second, we present our methodology about approach and procedures. Finally, we present the results of our experiments and the conclusion.

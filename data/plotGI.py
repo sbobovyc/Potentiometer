@@ -38,7 +38,8 @@ print ten_m_current
 x = numpy.array([1, 5, 10])
 A = numpy.array([x, numpy.ones(3)])
 y = numpy.array([one_m_current, five_m_current, ten_m_current])
-w = numpy.linalg.lstsq(A.T,y)[0]
+w,r = numpy.linalg.lstsq(A.T,y)[:2]
+r2 = 1 - r / (y.size * y.var())
 
 line = w[0]*x+w[1] # regression line
 
@@ -47,22 +48,13 @@ array = analyze("Group1B\\1mMinclear_DCPA.dat", 0x3EE)
 plt.scatter(x, y, marker="o")
 plt.plot(x, line, "r-")
 
+text = "y = %.2f * x + %.2f\nR^2 = %f" % (w[0], w[1], r2)
+plt.text(8, 0.25, text, ha='left')
 plt.xlim((0,11))
 plt.xlabel("Concentration (mM)")
 plt.ylabel("Current (uA)")
-plt.title("Concentration vs. current")
+plt.title("Concentration vs. average current response")
 
-"""
-plt.annotate('', xy=(3.6E7, 0.6), xytext=(3.7E7, 0.7),
-            arrowprops=dict(facecolor='black', shrink=0.05, width=0.5, color="r"),
-            )
-plt.annotate('', xy=(4E7, 0.37), xytext=(4.1E7, 0.47),
-            arrowprops=dict(facecolor='black', shrink=0.05, width=0.5, color="g"),
-            )
-plt.annotate('', xy=(3.9E7, 0.23), xytext=(4.1E7, 0.1),
-            arrowprops=dict(facecolor='black', shrink=0.05, width=0.5, color="b"),
-            )
-"""
 
 plt.savefig("CI.png")
 plt.show()
